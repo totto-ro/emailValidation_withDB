@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./../static/css/style.css') }}">
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <main>
+        <section class="surveyBox">
+            <h1>
+                Dojo Survey 
+            </h1>
+            <form action="/create/email" method="POST">
+                <div class="inputLines">
+                    <label for="email">
+                        Email:
+                    </label>
+                    <input type="text" id="email" name="email" />
+                </div>
+                <div class="inputLines">
+                    {% with messages = get_flashed_messages() %}     
+                        {% if messages %}  
+                            <h2>FLASH!!!!! AHHHHHHHH</h2>                 
+                                {% for message in messages %}            
+                                    <p>{{ message }}</p>                   
+                                {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <button type="submit">
+                    Add Email
+                </button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
