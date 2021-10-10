@@ -24,7 +24,7 @@ class Email:
         results = connectToMySQL(cls.db).query_db(query)
 
         emails = []
-        for element in results:
+        for element in results: #la validacion de si un email ya existe puede hacerse aquí?
             emails.append( Email( element['id'], element['email'], element['created_at'], element['updated_at'] ) )
         return emails
 
@@ -37,6 +37,7 @@ class Email:
         result = connectToMySQL( cls.db ).query_db( query, data )
         return result
 
+
     @staticmethod
     def is_valid( email ):
         is_valid = True
@@ -47,8 +48,8 @@ class Email:
         result = connectToMySQL( Email.db ).query_db( query, email )
         print(result)
         print('helloooo')
-        
-        if len( result ) >= 1:
+
+        if len( result ) >= 1: #find out if already there is an email 
             flash( "Email already taken." )
             is_valid = False
         if not EMAIL_REGEX.match( email ):
