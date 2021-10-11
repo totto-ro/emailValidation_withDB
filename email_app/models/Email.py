@@ -13,8 +13,11 @@ class Email:
         self.updated_at = updated_at
 
     @classmethod
-    def add_info( cls, data ):
+    def add_info( cls, email ):
         query = "INSERT into emails ( email ) VALUES (%(email)s);"
+        data = {
+            "email" : email
+        }
         result = connectToMySQL(cls.db).query_db( query,data )
         return result
 
@@ -39,20 +42,20 @@ class Email:
 
 
     @staticmethod
-    def is_valid( email ):
-        is_valid = True
+    def is_valid( emailID ):
         query = "SELECT* FROM emails WHERE email = %(email)s;"
         email = {
-            "email": email
+            "email": emailID
         }
         result = connectToMySQL( Email.db ).query_db( query, email )
         print(result)
         print('helloooo')
 
+        is_valid = True
         if len( result ) >= 1: #find out if already there is an email 
             flash( "Email already taken." )
             is_valid = False
-        if not EMAIL_REGEX.match( email ):
+        if not EMAIL_REGEX.match( emailID ):
             flash( "Invalid Email!!!" )
             is_valid = False
         return is_valid

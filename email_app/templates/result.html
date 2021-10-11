@@ -23,7 +23,7 @@
             <h1>Submitted Emails</h1>
             <div class="infoDetails">
                 {% for element in emails %}
-                <p><span> Email: </span> {{ element['email'] }}  {{ element['created_at'] }} <a href="/destroy/{{ email['id'] }}">Delete</a></p>
+                <p><span> Email: </span> {{ element.email }}  {{ element.created_at }} <a href="/destroy/{{ element.id }}">Delete</a></p>
                 {% endfor %}
             </div>
             <div>

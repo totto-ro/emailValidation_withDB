@@ -9,12 +9,11 @@ def index():
 @app.route( '/create/email', methods=['POST'] )
 def add_info():
 
-    email = request.form['email']
+    emailID  = request.form['email']
+    
 
-    if Email.is_valid( email ):
-        newEmail = Email ( email )
-        result = Email.add_info
-        Email.add_info( newEmail )
+    if Email.is_valid( emailID ):
+        result = Email.add_info( emailID )
         print( result )
         return redirect ( '/result' )
     else:
@@ -25,7 +24,8 @@ def add_info():
 
 @app.route( '/result' )
 def results():
-    email = Email.get_all()
+
+    email = Email.get_all(  )
     return render_template( 'result.html', emails = email )
 
 @app.route( "/destroy/<int:id>",  methods=['GET'])
